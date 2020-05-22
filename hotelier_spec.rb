@@ -27,6 +27,12 @@ end
 describe Hotel do 
 
     describe 'Checking in a guest' do
+        it 'adds the guest to the guest list' do
+            hotel = Hotel.new
+            hotel.check_in_guest('Jack Fliegler', 105)
+            expect(hotel.guests).to include 'Jack Fliegler'
+        end
+
         context 'room is available' do
             it 'allows check-in' do
                 hotel = Hotel.new
@@ -39,6 +45,13 @@ describe Hotel do
                 hotel = Hotel.new
                 hotel.check_in_guest('Masafumi Gotoh', 221)
                 expect(hotel.check_in_guest('Ryuichi Sakamoto', 221)).to be false
+            end
+
+            it 'does not add guest to guest list' do
+                hotel = Hotel.new
+                hotel.check_in_guest('Jules Conroy', 405)
+                hotel.check_in_guest('Jimi Hendrix', 405)
+                expect(hotel.guests).to_not include 'Jimi Hendrix'
             end
         end
     end
