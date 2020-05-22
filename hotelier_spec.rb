@@ -25,21 +25,24 @@ class Hotel
 end
 
 describe Hotel do 
-    
-    context 'room is available' do
-        it 'allows check-in' do
-            hotel = Hotel.new
-            expect(hotel.check_in_guest('George Harrison', 302)).to be true
+
+    describe 'Checking in a guest' do
+        context 'room is available' do
+            it 'allows check-in' do
+                hotel = Hotel.new
+                expect(hotel.check_in_guest('George Harrison', 302)).to be true
+            end
+        end
+
+        context 'room is not available' do
+            it 'does not allow check-in' do
+                hotel = Hotel.new
+                hotel.check_in_guest('Masafumi Gotoh', 221)
+                expect(hotel.check_in_guest('Ryuichi Sakamoto', 221)).to be false
+            end
         end
     end
 
-    context 'room is not available' do
-        it 'does not allow check-in' do
-            hotel = Hotel.new
-            hotel.check_in_guest('Masafumi Gotoh', 221)
-            expect(hotel.check_in_guest('Ryuichi Sakamoto', 221)).to be false
-        end
-    end
 
     it 'can check out a guest' do
         hotel = Hotel.new
