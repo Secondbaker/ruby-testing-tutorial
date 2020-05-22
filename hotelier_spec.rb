@@ -5,10 +5,13 @@ class Hotel
 
     def initialize
         @guests = []
+        @occupied_rooms = []
     end
 
     def check_in_guest(guest_name, room_number)
         @guests << guest_name
+        return false if @occupied_rooms.include?(room_number)
+        @occupied_rooms << room_number
         true
     end
     
