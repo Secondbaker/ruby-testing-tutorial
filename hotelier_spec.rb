@@ -21,10 +21,19 @@ class Hotel
 end
 
 describe Hotel do 
-    it 'can check in a guest' do
-        hotel = Hotel.new
-        hotel.check_in_guest('George Harrison', 302)
-        expect(hotel.guests).to include 'George Harrison'
+    
+    context 'room is available' do
+        it 'allows check-in' do
+            hotel.check_in_guest('George Harrison', 302).to be true
+        end
+    end
+
+    context 'room is not available' do
+        it 'does not allow check-in' do
+            hotel = Hotel.new
+            hotel.check_in_guest('Masafumi Gotoh', 221)
+            expect(hotel.check_in_guest('Ryuichi Sakamoto', 221)).to be false
+        end
     end
 
     it 'can check out a guest' do
@@ -34,12 +43,6 @@ describe Hotel do
         expect(hotel.guests).to_not include 'Ringo Starr'
     end
 
-    it 'cannot check two guests into the same room' do
-        hotel = Hotel.new
-        hotel.check_in_guest('Masafumi Gotoh', 221)
-        hotel.check_in_guest('Ryuichi Sakamoto', 221)
-        expect(hotel.guests).to_not include 'Ryuichi Sakamoto'
-    end
 
     it 'decreases total number of available rooms when a guest is checked in' do
         hotel = Hotel.new
