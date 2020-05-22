@@ -7,7 +7,7 @@ class Hotel
         @guests = []
     end
 
-    def check_in_guest(guest_name)
+    def check_in_guest(guest_name, room_number)
         @guests << guest_name
     end
     
@@ -19,13 +19,13 @@ end
 describe Hotel do 
     it 'can check in a guest' do
         hotel = Hotel.new
-        hotel.check_in_guest('George Harrison')
+        hotel.check_in_guest('George Harrison', 302)
         expect(hotel.guests).to include 'George Harrison'
     end
 
     it 'can check out a guest' do
         hotel = Hotel.new
-        hotel.check_in_guest('Ringo Starr')
+        hotel.check_in_guest('Ringo Starr', 401)
         expect(hotel.guests).to include 'Ringo Starr'
         hotel.check_out_guest('Ringo Starr')
         expect(hotel.guests).to_not include 'Ringo Starr'
