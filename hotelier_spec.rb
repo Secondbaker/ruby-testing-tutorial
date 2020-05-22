@@ -19,6 +19,10 @@ class Hotel
         @guests.delete(guest_name)
     end
 
+    def room_is_vacant?(room_number)
+        false
+    end
+
     def vacant_room_count
 
     end
@@ -53,11 +57,18 @@ describe Hotel do
         end
     end
 
+    describe 'Checking out a guest' do
+        it 'can check out a guest' do
+            hotel.check_in_guest('Ringo Starr', 401)
+            hotel.check_out_guest('Ringo Starr')
+            expect(hotel.guests).to_not include 'Ringo Starr'
+        end
 
-    it 'can check out a guest' do
-        hotel.check_in_guest('Ringo Starr', 401)
-        hotel.check_out_guest('Ringo Starr')
-        expect(hotel.guests).to_not include 'Ringo Starr'
+        it 'opens a room' do
+            hotel.check_in_guest('Christophe Blondel', 104)
+            hotel.check_out_guest('Christophe Blondel')
+            expect(hotel.room_is_vacant?(104)).to be true
+        end
     end
 
 
