@@ -12,7 +12,7 @@ class Hotel
     end
     
     def check_out_guest(guest_name)
-
+        @guests.delete(guest_name)
     end
 end
 
