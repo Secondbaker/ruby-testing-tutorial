@@ -58,7 +58,7 @@ describe Hotel do
     end
 
     describe 'Checking out a guest' do
-        it 'can check out a guest' do
+        it 'removes the guest from the hotel\'s guest list' do
             hotel.check_in_guest('Ringo Starr', 401)
             hotel.check_out_guest('Ringo Starr')
             expect(hotel.guests).to_not include 'Ringo Starr'
@@ -68,6 +68,12 @@ describe Hotel do
             hotel.check_in_guest('Christophe Blondel', 104)
             hotel.check_out_guest('Christophe Blondel')
             expect(hotel.room_is_vacant?(104)).to be true
+        end
+
+        it 'opens a room (the tutorial way)' do
+            hotel.check_in_guest('Joe Satriani', 205)
+            hotel.check_out_guest('Joe Satriani')
+            expect(hotel.check_in_guest('Satch', 205)).to be true
         end
     end
 
