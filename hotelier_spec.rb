@@ -9,6 +9,7 @@ class Hotel
 
     def check_in_guest(guest_name, room_number)
         @guests << guest_name
+        true
     end
     
     def check_out_guest(guest_name)
@@ -24,7 +25,8 @@ describe Hotel do
     
     context 'room is available' do
         it 'allows check-in' do
-            hotel.check_in_guest('George Harrison', 302).to be true
+            hotel = Hotel.new
+            expect(hotel.check_in_guest('George Harrison', 302)).to be true
         end
     end
 
