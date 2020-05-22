@@ -15,12 +15,13 @@ class Hotel
         true
     end
     
-    def check_out_guest(guest_name)
+    def check_out_guest(guest_name, room_number)
         @guests.delete(guest_name)
+        @occupied_rooms.delete(room_number)
     end
 
     def room_is_vacant?(room_number)
-        false
+        !@occupied_rooms.include?(room_number)
     end
 
     def vacant_room_count
@@ -60,28 +61,20 @@ describe Hotel do
     describe 'Checking out a guest' do
         it 'removes the guest from the hotel\'s guest list' do
             hotel.check_in_guest('Ringo Starr', 401)
-            hotel.check_out_guest('Ringo Starr')
+            hotel.check_out_guest('Ringo Starr', 401)
             expect(hotel.guests).to_not include 'Ringo Starr'
         end
 
         it 'opens a room' do
             hotel.check_in_guest('Christophe Blondel', 104)
-            hotel.check_out_guest('Christophe Blondel')
+            hotel.check_out_guest('Christophe Blondel', 104)
             expect(hotel.room_is_vacant?(104)).to be true
         end
 
         it 'opens a room (the tutorial way)' do
             hotel.check_in_guest('Joe Satriani', 205)
-            hotel.check_out_guest('Joe Satriani')
+            hotel.check_out_guest('Joe Satriani', 205)
             expect(hotel.check_in_guest('Satch', 205)).to be true
         end
-    end
-
-
-    it 'decreases total number of available rooms when a guest is checked in' do
-        start_room_count = hotel.vacant_room_count
-        hotel.check_in_guest('Rivers Cuomo', 253)
-        end_room_count = hotel.vacant_room_count
-        expect(end_room_count).to eq(start_room_count - 1)
     end
 end
