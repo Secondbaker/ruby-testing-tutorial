@@ -48,4 +48,20 @@ describe Hotel do
             expect(hotel.check_in_guest('Satch', 205)).to be true
         end
     end
+
+    describe 'Checking current state' do
+        context 'when a guest is checked in' do
+            
+            it 'the hotel can find which room the guest is in' do
+                hotel.check_in_guest('Neil Peart', 110)
+                expect(hotel.check_room_number('Neil Peart')).to eq 110
+            end
+
+            it 'the hotel can find which guest is in a room' do
+                hotel.check_in_guest('Neil Peart', 110)
+                expect(hotel.check_guest_name(110)).to eq 'Neil Peart'
+            end
+        end
+    end
+
 end

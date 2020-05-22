@@ -4,6 +4,7 @@ class Hotel
     def initialize
         @guests = []
         @occupied_rooms = []
+        @checkins = {}
     end
 
     def check_in_guest(guest_name, room_number)      
