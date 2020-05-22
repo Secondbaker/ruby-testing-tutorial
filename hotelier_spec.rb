@@ -26,29 +26,26 @@ end
 
 describe Hotel do 
 
+    let(:hotel) { Hotel.new }
     describe 'Checking in a guest' do
         it 'adds the guest to the guest list' do
-            hotel = Hotel.new
             hotel.check_in_guest('Jack Fliegler', 105)
             expect(hotel.guests).to include 'Jack Fliegler'
         end
 
         context 'room is available' do
             it 'allows check-in' do
-                hotel = Hotel.new
                 expect(hotel.check_in_guest('George Harrison', 302)).to be true
             end
         end
 
         context 'room is not available' do
             it 'does not allow check-in' do
-                hotel = Hotel.new
                 hotel.check_in_guest('Masafumi Gotoh', 221)
                 expect(hotel.check_in_guest('Ryuichi Sakamoto', 221)).to be false
             end
 
             it 'does not add guest to guest list' do
-                hotel = Hotel.new
                 hotel.check_in_guest('Jules Conroy', 405)
                 hotel.check_in_guest('Jimi Hendrix', 405)
                 expect(hotel.guests).to_not include 'Jimi Hendrix'
@@ -58,7 +55,6 @@ describe Hotel do
 
 
     it 'can check out a guest' do
-        hotel = Hotel.new
         hotel.check_in_guest('Ringo Starr', 401)
         hotel.check_out_guest('Ringo Starr')
         expect(hotel.guests).to_not include 'Ringo Starr'
@@ -66,7 +62,6 @@ describe Hotel do
 
 
     it 'decreases total number of available rooms when a guest is checked in' do
-        hotel = Hotel.new
         start_room_count = hotel.vacant_room_count
         hotel.check_in_guest('Rivers Cuomo', 253)
         end_room_count = hotel.vacant_room_count
